@@ -296,17 +296,14 @@ function wpcf7_load_modules() {
 		return false;
 	}
 
-	$mods = array(
-		'acceptance', 'flamingo',
-		'akismet', 'jetpack', 'submit', 'captcha', 'number',
-		'text', 'checkbox', 'quiz', 'textarea', 'date',
-		'response', 'file', 'select', 'listo', 'count' );
+	foreach(glob(trailingslashit( $dir ).'*.php') as $filename){
+     $mods[] = $filename;
+ 	}
+
 
 	foreach ( $mods as $mod ) {
-		$file = trailingslashit( $dir ) . $mod . '.php';
-
-		if ( file_exists( $file ) ) {
-			include_once $file;
+		if ( file_exists( $mod ) ) {
+			include_once $mod;
 		}
 	}
 }
